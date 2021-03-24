@@ -107,7 +107,7 @@ function get(serviceNowTable, callback) {
  *   Will be HTML text if hibernating instance.
  * @param {error} callback.error - The error property of callback.
  */
-function get(serviceNowTable, callback) {
+function post(serviceNowTable, callback) {
 
   // Initialize return arguments for callback
   let callbackData = null;
@@ -118,7 +118,7 @@ function get(serviceNowTable, callback) {
   // that holds the HTTP request method, credentials, and the API's URL.
   // Some properties are hardcoded, like the method and part of the URI.
   // Some properties are read from global const options.
-  // Some properties are passed into function get() through parameters.
+  // Some properties are passed into function post() through parameters.
   const requestOptions = {
     method: 'POST',
     auth: {
