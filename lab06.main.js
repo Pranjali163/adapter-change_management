@@ -8,15 +8,15 @@
 	* Built-in module path's join method constructs the absolute filename.
 	*/
 	const ServiceNowConnector = require(path.join(__dirname, '/connector.js'));
-
-    /**
+	
+	/**
 	* Import built-in Node.js package events' EventEmitter class and
 	* assign it to constant EventEmitter. We will create a child class
 	* from this class.
 	*/
 	const EventEmitter = require('events').EventEmitter;
-
-/**
+	
+	/**
 	* The ServiceNowAdapter class.
 	*
 	* @summary ServiceNow Change Request Adapter
@@ -245,34 +245,9 @@
 	     */
 	
 	     //this.post(callback);
-           this.connector.post((data,error) => {
-           let returnedData = null;
-         let returnedError = null;
-         if (error) {
-             returnedError = error;
-             log.error("POST request returned error: " + returnedError)
-         } else {
-             returnedData = data;
-             log.trace("POST Request returned " + JSON.stringify(returnedData));
-             if (returnedData.body) {
-                 let bodyAsObject = JSON.parse(returnedData.body);
-                 let resultObject = bodyAsObject.result;
-                 let modifiedObject = {
-                         change_ticket_number: resultObject.number,
-                         active: resultObject.active,
-                         priority: resultObject.priority,
-                         description: resultObject.description,
-                         work_start: resultObject.work_start,
-                         work_end: resultObject.work_end,
-                         change_ticket_key: resultObject.sys_id
-                     };
-                 
-                 returnedData = modifiedObject;
-             };
-         };
-         return callback(returnedData, returnedError);
-        });
-
+	     this.connector.post((data,error) => callback(data,error));
 	  }
 	}
-    module.exports = ServiceNowAdapter;
+	
+	module.exports = ServiceNowAdapter;
+
